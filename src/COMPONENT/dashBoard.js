@@ -7,6 +7,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { storage, db } from './firebase';
 import { doc, setDoc } from "firebase/firestore"
 //import '../SCSS/dashBoard.scss'
+
 import './dashBoard.css'
 
 export default function DashBoard () {
