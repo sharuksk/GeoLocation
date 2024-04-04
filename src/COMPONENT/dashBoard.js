@@ -19,10 +19,11 @@ export default function DashBoard () {
     console.log(state);
   }, [state]);
 
-
+  var x;
     const handleGetVideo = async() => {
         await axios.post(`${linkNode}/getvideo`).then(async (res) => {
-            console.log(res.data.message);
+            setVideo(res.data.file64);
+            console.log(video);
         });
     }
     const handleClick = async() => {
@@ -41,7 +42,6 @@ export default function DashBoard () {
           console.log(err);
         }
       };
-
     
   return (
     <>

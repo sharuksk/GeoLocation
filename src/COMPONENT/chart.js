@@ -1,122 +1,126 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
+import './chart.css';
 
 const chartSetting = {
   yAxis: [
     {
-      label: 'rainfall (mm)',
+      label: '',
     },
   ],
   width: 500,
   height: 300,
   sx: {
     [`.${axisClasses.left} .${axisClasses.label}`]: {
-      transform: 'translate(-20px, 0)',
+      transform: 'translate(-0px, 0)',
     },
   },
 };
 const dataset = [
   {
-    london: 59,
-    paris: 57,
-    newYork: 86,
-    seoul: 21,
+    Doha: 59,
+    Lusail: 57,
+    IndustrialArea: 86,
+    Rayyan: 21,
     month: 'Jan',
   },
   {
-    london: 50,
-    paris: 52,
-    newYork: 78,
-    seoul: 28,
+    Doha: 50,
+    Lusail: 52,
+    IndustrialArea: 78,
+    Rayyan: 28,
     month: 'Fev',
   },
   {
-    london: 47,
-    paris: 53,
-    newYork: 106,
-    seoul: 41,
+    Doha: 47,
+    Lusail: 53,
+    IndustrialArea: 106,
+    Rayyan: 41,
     month: 'Mar',
   },
   {
-    london: 54,
-    paris: 56,
-    newYork: 92,
-    seoul: 73,
+    Doha: 54,
+    Lusail: 56,
+    IndustrialArea: 92,
+    Rayyan: 73,
     month: 'Apr',
   },
   {
-    london: 57,
-    paris: 69,
-    newYork: 92,
-    seoul: 99,
+    Doha: 57,
+    Lusail: 69,
+    IndustrialArea: 92,
+    Rayyan: 99,
     month: 'May',
   },
   {
-    london: 60,
-    paris: 63,
-    newYork: 103,
-    seoul: 144,
+    Doha: 60,
+    Lusail: 63,
+    IndustrialArea: 103,
+    Rayyan: 144,
     month: 'June',
   },
   {
-    london: 59,
-    paris: 60,
-    newYork: 105,
-    seoul: 319,
+    Doha: 59,
+    Lusail: 60,
+    IndustrialArea: 105,
+    Rayyan: 319,
     month: 'July',
   },
   {
-    london: 65,
-    paris: 60,
-    newYork: 106,
-    seoul: 249,
+    Doha: 65,
+    Lusail: 60,
+    IndustrialArea: 106,
+    Rayyan: 249,
     month: 'Aug',
   },
   {
-    london: 51,
-    paris: 51,
-    newYork: 95,
-    seoul: 131,
+    Doha: 51,
+    Lusail: 51,
+    IndustrialArea: 95,
+    Rayyan: 131,
     month: 'Sept',
   },
   {
-    london: 60,
-    paris: 65,
-    newYork: 97,
-    seoul: 55,
+    Doha: 60,
+    Lusail: 65,
+    IndustrialArea: 97,
+    Rayyan: 55,
     month: 'Oct',
   },
   {
-    london: 67,
-    paris: 64,
-    newYork: 76,
-    seoul: 48,
+    Doha: 67,
+    Lusail: 64,
+    IndustrialArea: 76,
+    Rayyan: 48,
     month: 'Nov',
   },
   {
-    london: 61,
-    paris: 70,
-    newYork: 103,
-    seoul: 25,
+    Doha: 61,
+    Lusail: 70,
+    IndustrialArea: 103,
+    Rayyan: 25,
     month: 'Dec',
   },
 ];
 
-const valueFormatter = (value) => `${value}mm`;
+const valueFormatter = (value) => `${value} vehicles`;
 
-export default function chart() {
+export default function Chart() {
   return (
+    <>
+    <h1>Vehicle Count Area Wise</h1>
     <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
       series={[
-        { dataKey: 'london', label: 'London', valueFormatter },
-        { dataKey: 'paris', label: 'Paris', valueFormatter },
-        { dataKey: 'newYork', label: 'New York', valueFormatter },
-        { dataKey: 'seoul', label: 'Seoul', valueFormatter },
+        { dataKey: 'Doha', label: 'Doha', valueFormatter },
+        { dataKey: 'Lusail', label: 'Lusail', valueFormatter },
+        { dataKey: 'IndustrialArea', label: 'New York', valueFormatter },
+        { dataKey: 'Rayyan', label: 'Rayyan', valueFormatter },
       ]}
       {...chartSetting}
     />
+    </>
   );
 }
