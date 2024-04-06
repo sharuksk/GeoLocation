@@ -7,7 +7,9 @@ import './dashBoard.css'
 import {linkNode} from "../nodelink";
 import axios from "axios";
 import FileBase64 from "react-file-base64";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar  } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
+import ExportExcel from './excel'
 
 export default function DashBoard () {
   const [base, setBase] = useState("");
@@ -105,6 +107,12 @@ export default function DashBoard () {
       const handleChange = (event) => {
       setValue(event.target.value);
       };
+
+      const { data, loading } = useDemoData({
+        dataSet: 'Commodity',
+        rowLength: 4,
+        maxColumns: 6,
+      });
     
   return (
     <>
@@ -162,7 +170,7 @@ export default function DashBoard () {
                 }}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
-            />
+                loading={loading} slots={{ toolbar: GridToolbar }}/>
         </div>
         {/* <div className="box">
             <h2 className="header">

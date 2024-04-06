@@ -26,6 +26,7 @@ import {
 import DashBoard from './dashBoard'
 import Chart from './chart'
 import MyMap from './map'
+import ExportExcel from './excel'
 
 
 
@@ -56,7 +57,7 @@ export default function FileArea(props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Location', 'DashBoard', 'Charts', 'Drafts'].map((text, index) => (
+        {['Location', 'DashBoard', 'Charts', 'Excel'].map((text, index) => (
           <ListItem key={text} disablePadding
             onClick={() => {
                 if (text === "Location") {
@@ -65,8 +66,8 @@ export default function FileArea(props) {
                 navigate("./dashboard");
                 } else if (text === "Charts") {
                 navigate("./reports");
-                } else if (text === "Drafts") {
-                navigate("./drafts");
+                } else if (text === "Excel") {
+                navigate("./excel");
                 } 
             }}
             >
@@ -157,6 +158,7 @@ export default function FileArea(props) {
                 <Route path="/location" element={<MyMap/>} /> 
                 <Route path="/dashboard" element={<DashBoard/>} />
                 <Route path="/reports" element={<Chart/>} />
+                <Route path="/excel" element={<ExportExcel/>} />
             </Routes>
         </Typography>
       </Box>
