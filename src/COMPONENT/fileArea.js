@@ -25,7 +25,7 @@ import {
   } from "react-router-dom";
 import DashBoard from './dashBoard'
 import Chart from './chart'
-import Map from './map'
+import MyMap from './map'
 
 
 
@@ -154,7 +154,7 @@ export default function FileArea(props) {
         <Toolbar />
         <Typography paragraph>
             <Routes>
-                <Route path="/location" element={<Map/>} /> 
+                <Route path="/location" element={<MyMap/>} /> 
                 <Route path="/dashboard" element={<DashBoard/>} />
                 <Route path="/reports" element={<Chart/>} />
             </Routes>

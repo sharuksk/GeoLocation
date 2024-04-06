@@ -1,128 +1,50 @@
-import './map.css'
-import { Helmet } from 'react-helmet';
+import React from 'react'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-export default function Map() {
+const containerStyle = {
+  width: '1000px',
+  height: '500px'
+};
 
-    // useEffect(() => {
-    //     const script = document.createElement('script');
-    //     script.setAttribute('src', 'https://polyfill.io/v3/polyfill.min.js?features=default', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWUSbZvw3k4XBYVhoGKPaqnSQ0E-DN90&callback=initMap&v=weekly&solution_channel=GMP_CCS_geocodingservice_v1');
-    //     document.appendChild(script);
+const center = {
+  lat: -3.745,
+  lng: -38.523
+};
 
-    //     const script1 = document.createElement('script');
-    //     script1.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWUSbZvw3k4XBYVhoGKPaqnSQ0E-DN90&callback=initMap&v=weekly&solution_channel=GMP_CCS_geocodingservice_v1');
-    //     document.appendChild(script1);
-    //   }, []);
-    
-    // const script1 = document.createElement("script");
-    // script1.src = "https://polyfill.io/v3/polyfill.min.js?features=default";
-    // script1.async = true;
+function MyMap() {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBWWUSbZvw3k4XBYVhoGKPaqnSQ0E-DN90"
+  })
 
-    // const script2 = document.createElement("script");
-    // script2.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWUSbZvw3k4XBYVhoGKPaqnSQ0E-DN90&callback=initMap&v=weekly&solution_channel=GMP_CCS_geocodingservice_v1";
-    // script2.async = true;
+  const [map, setMap] = React.useState(null)
 
-    let map;
-    let marker;
-    let geocoder;
-    let responseDiv;
-    let response;
-    const google = window.google
+  const onLoad = React.useCallback(function callback(map) {
+    // This is just an example of getting and using the map instance!!! don't just blindly copy!
+    const bounds = new window.google.maps.LatLngBounds(center);
+    map.fitBounds(bounds);
 
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: { lat: -34.397, lng: 150.644 },
-        mapTypeControl: false,
-      });
-      geocoder = new google.maps.Geocoder();
+    setMap(map)
+  }, [])
 
-      const inputText = document.createElement("input");
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
 
-      inputText.type = "text";
-      inputText.placeholder = "Enter a location";
-
-      const submitButton = document.createElement("input");
-
-      submitButton.type = "button";
-      submitButton.value = "Geocode";
-      submitButton.classList.add("button", "button-primary");
-
-      const clearButton = document.createElement("input");
-
-      clearButton.type = "button";
-      clearButton.value = "Clear";
-      clearButton.classList.add("button", "button-secondary");
-      response = document.createElement("pre");
-      response.id = "response";
-      response.innerText = "";
-      responseDiv = document.createElement("div");
-      responseDiv.id = "response-container";
-      responseDiv.appendChild(response);
-
-      const instructionsElement = document.createElement("p");
-
-      instructionsElement.id = "instructions";
-      instructionsElement.innerHTML =
-        "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
-      map.controls[google.maps.ControlPosition.LEFT_TOP].push(
-        instructionsElement
-      );
-      map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
-      marker = new google.maps.Marker({
-        map,
-      });
-      map.addListener("click", (e) => {
-        geocode({ location: e.latLng });
-      });
-      submitButton.addEventListener("click", () =>
-        geocode({ address: inputText.value })
-      );
-      clearButton.addEventListener("click", () => {
-        clear();
-      });
-      clear();
-    }
-
-    function clear() {
-      marker.setMap(null);
-    }
-
-    function geocode(request) {
-      clear();
-      geocoder
-        .geocode(request)
-        .then((result) => {
-          const { results } = result;
-
-          map.setCenter(results[0].geometry.location);
-          marker.setPosition(results[0].geometry.location);
-          marker.setMap(map);
-          response.innerText = JSON.stringify(result, null, 2);
-          return results;
-        })
-        .catch((e) => {
-          alert("Geocode was not successful for the following reason: " + e);
-        });
-    }
-
-    window.initMap = initMap;
-    return (
-        <div>
-            {/* <div>{document.body.appendChild(script1)}</div>
-            <div>{document.body.appendChild(script2)}</div> */}
-            <Helmet>
-                <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWWUSbZvw3k4XBYVhoGKPaqnSQ0E-DN90&callback=initMap&v=weekly&solution_channel=GMP_CCS_geocodingservice_v1"></script>
-            </Helmet>
-
-            <div id="map"></div>
-        </div>
-
-    )
+  return isLoaded ? (
+    <body>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={5}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+        <></>
+      </GoogleMap>
+      </body>
+  ) : <></>
 }
 
-    
-    
+export default React.memo(MyMap)
