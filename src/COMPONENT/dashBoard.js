@@ -49,7 +49,7 @@ export default function DashBoard () {
             });
             
         } catch (err) {
-          console.log(err);
+          alert("Please Select a File to Upload");
         }
       };
     
@@ -80,7 +80,7 @@ export default function DashBoard () {
                 </td>
                 <td>
                     <div className="box1">
-                    <video className="video" width="750" height="500" controls source src={video}>
+                    <video className="video" width="750" height="500" loop muted autoPlay controls source src={video}>
                     </video>
                     </div> 
                 </td>
