@@ -18,6 +18,7 @@ function MyMap() {
   })
 
   const [map, setMap] = React.useState(null)
+  console.log(map);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -29,7 +30,9 @@ function MyMap() {
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
+    console.log(map);
   }, [])
+
 
   return isLoaded ? (
     <body>

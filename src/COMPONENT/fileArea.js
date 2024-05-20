@@ -18,7 +18,6 @@ import Toolbar from '@mui/material/Toolbar';
 import '../SCSS/fileArea.scss'
 import Typography from '@mui/material/Typography';
 import {
-    BrowserRouter as Router,
     Route,
     Routes,
     useNavigate,

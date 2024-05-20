@@ -9,7 +9,6 @@ import axios from "axios";
 import FileBase64 from "react-file-base64";
 import { DataGrid, GridToolbar  } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
-import ExportExcel from './excel'
 
 export default function DashBoard () {
   const [base, setBase] = useState("");
@@ -108,7 +107,7 @@ export default function DashBoard () {
       setValue(event.target.value);
       };
 
-      const { data, loading } = useDemoData({
+      const {loading } = useDemoData({
         dataSet: 'Commodity',
         rowLength: 4,
         maxColumns: 6,
