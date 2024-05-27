@@ -120,7 +120,7 @@ export default function Chart() {
       series={[
         { dataKey: 'Doha', label: 'Doha', valueFormatter },
         { dataKey: 'Lusail', label: 'Lusail', valueFormatter },
-        { dataKey: 'IndustrialArea', label: 'New York', valueFormatter },
+        { dataKey: 'IndustrialArea', label: 'Industrial Area', valueFormatter },
         { dataKey: 'Rayyan', label: 'Rayyan', valueFormatter },
       ]}
       {...chartSetting}
